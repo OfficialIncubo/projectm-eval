@@ -601,13 +601,13 @@ prjm_eval_function_decl(mod)
     invoke_arg(0, &val1_ptr);
     invoke_arg(1, &val2_ptr);
 
-    int divisor = (int) *val2_ptr;
+    int32_t divisor = (int32_t) *val2_ptr;
     if (divisor == 0)
     {
         assign_ret_val(0.0);
         return;
     }
-    assign_ret_val((PRJM_EVAL_F) ((int) *val1_ptr % divisor));
+    assign_ret_val((PRJM_EVAL_F) ((int32_t) *val1_ptr % divisor));
 }
 
 prjm_eval_function_decl(boolean_and_op)
@@ -832,13 +832,13 @@ prjm_eval_function_decl(mod_op)
     invoke_arg(0, ret_val);
     invoke_arg(1, &val2_ptr);
 
-    int divisor = (int) *val2_ptr;
+    int32_t divisor = (int32_t) *val2_ptr;
     if (divisor == 0)
     {
         assign_ret_val(0.0);
         return;
     }
-    assign_ret_val((PRJM_EVAL_F) ((int)(**ret_val) % divisor));
+    assign_ret_val((PRJM_EVAL_F) ((int32_t)(**ret_val) % divisor));
 }
 
 prjm_eval_function_decl(pow_op)
