@@ -9,6 +9,7 @@
 #include <math.h>
 #include <assert.h>
 #include <stdint.h>
+#include <stdlib.h>
 
 /**
  * @brief projectM-EvalLib intrinsic Function table.
@@ -601,13 +602,16 @@ prjm_eval_function_decl(mod)
     invoke_arg(0, &val1_ptr);
     invoke_arg(1, &val2_ptr);
 
-    int divisor = (int) *val2_ptr;
+    int32_t divisor = (int32_t) fabs(*val2_ptr);
     if (divisor == 0)
     {
         assign_ret_val(0.0);
         return;
     }
-    assign_ret_val((PRJM_EVAL_F) ((int) *val1_ptr % divisor));
+    
+    int32_t result = (int32_t)fmod(*val1_ptr, divisor);
+    
+    assign_ret_val((PRJM_EVAL_F) isnan(result) ? 0 : result);
 }
 
 prjm_eval_function_decl(boolean_and_op)
@@ -832,13 +836,16 @@ prjm_eval_function_decl(mod_op)
     invoke_arg(0, ret_val);
     invoke_arg(1, &val2_ptr);
 
-    int divisor = (int) *val2_ptr;
+    int32_t divisor = (int32_t) fabs(*val2_ptr);
     if (divisor == 0)
     {
         assign_ret_val(0.0);
         return;
     }
-    assign_ret_val((PRJM_EVAL_F) ((int)(**ret_val) % divisor));
+    
+    int32_t result = (int32_t)fmod(**ret_val, divisor);
+    
+    assign_ret_val((PRJM_EVAL_F) isnan(result) ? 0 : result);
 }
 
 prjm_eval_function_decl(pow_op)
