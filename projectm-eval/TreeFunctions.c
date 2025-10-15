@@ -607,7 +607,10 @@ prjm_eval_function_decl(mod)
         assign_ret_val(0.0);
         return;
     }
-    assign_ret_val((PRJM_EVAL_F) ((int32_t) *val1_ptr % divisor));
+    
+    int32_t result = (int32_t)fmod(*val1_ptr, divisor);
+    
+    assign_ret_val((PRJM_EVAL_F) isnan(result) ? 0 : result);
 }
 
 prjm_eval_function_decl(boolean_and_op)
@@ -838,7 +841,10 @@ prjm_eval_function_decl(mod_op)
         assign_ret_val(0.0);
         return;
     }
-    assign_ret_val((PRJM_EVAL_F) ((int32_t)(**ret_val) % divisor));
+    
+    int32_t result = (int32_t)fmod(**ret_val, divisor);
+    
+    assign_ret_val((PRJM_EVAL_F) isnan(result) ? 0 : result);
 }
 
 prjm_eval_function_decl(pow_op)
