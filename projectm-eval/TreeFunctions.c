@@ -608,7 +608,6 @@ prjm_eval_function_decl(mod)
         assign_ret_val(0.0);
         return;
     }
-	
     assign_ret_val((PRJM_EVAL_F) ((int64_t) *val1_ptr % divisor));
 }
 
